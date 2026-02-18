@@ -2,36 +2,40 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BM Manager Market | بوابة الرواد</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #6b21a8; --gold: #fbbf24; }
         body { font-family: 'Cairo', sans-serif; margin: 0; background-color: #0f172a; color: white; overflow: hidden; }
 
-        /* واجهة الكمبيوتر الفخمة */
+        /* واجهة الكمبيوتر الاحترافية */
         #pc-interface { display: none; min-height: 100vh; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; }
         .ramadan-bg { position: fixed; inset: 0; background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 100%); z-index: -1; }
         
-        /* فوانيس ذهبية برمجية - حل مشكلة الصور المكسورة */
+        /* الفوانيس الذهبية (حل مشكلة الصور المكسورة نهائياً) */
         .lanterns { display: flex; gap: 60px; margin-bottom: 25px; }
         .lantern-svg { width: 70px; height: 90px; fill: var(--gold); filter: drop-shadow(0 0 15px var(--gold)); animation: swing 3s infinite ease-in-out; }
         @keyframes swing { 0%, 100% { transform: rotate(-12deg); transform-origin: top center; } 50% { transform: rotate(12deg); } }
 
-        .welcome-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); border: 2px solid var(--gold); border-radius: 35px; padding: 45px; max-width: 650px; box-shadow: 0 0 50px rgba(0,0,0,0.6); }
-        .joy-title { color: var(--gold); font-size: 2rem; margin-bottom: 15px; text-shadow: 0 0 10px rgba(251, 191, 36, 0.5); }
+        .welcome-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); border: 2px solid var(--gold); border-radius: 35px; padding: 45px; max-width: 600px; box-shadow: 0 0 50px rgba(0,0,0,0.6); }
+        .joy-title { color: var(--gold); font-size: 2.2rem; margin-bottom: 15px; text-shadow: 0 0 15px rgba(251, 191, 36, 0.6); }
         
-        .btn-play { background: var(--gold); color: var(--primary); border: none; padding: 18px 45px; border-radius: 50px; font-weight: bold; font-size: 1.3rem; cursor: pointer; transition: 0.4s; margin-top: 25px; width: 100%; box-shadow: 0 5px 15px rgba(251, 191, 36, 0.3); }
-        .btn-play:hover { transform: scale(1.03); box-shadow: 0 0 25px var(--gold); }
+        /* زر التشغيل القسري */
+        .btn-start { 
+            background: var(--gold); color: var(--primary); border: none; padding: 20px 50px; 
+            border-radius: 50px; font-weight: bold; font-size: 1.4rem; cursor: pointer; 
+            transition: 0.4s; margin-top: 25px; width: 100%; box-shadow: 0 5px 15px rgba(251, 191, 36, 0.4);
+        }
+        .btn-start:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--gold); }
 
-        /* شاشة التحويل للهاتف */
         #mobile-loader { display: none; height: 100vh; align-items: center; justify-content: center; background: #0f172a; }
     </style>
 </head>
 <body>
 
-    <audio id="ramadanAudio" loop preload="auto">
-        <source src="https://www.islamic-invitation.com/sounds/ramadan/ahlan-ramadan.mp3" type="audio/mpeg">
+    <audio id="ramadanOldie" loop preload="auto">
+        <source src="https://server11.mp3quran.net/download/anasheed_top/072.mp3" type="audio/mpeg">
     </audio>
 
     <div id="pc-interface">
@@ -40,62 +44,47 @@
             <svg class="lantern-svg" viewBox="0 0 24 24"><path d="M12,2L9,5H15L12,2M8,6V18H9V19H15V18H16V6H8M11,14H13V16H11V14M11,8H13V12H11V8Z"/></svg>
             <svg class="lantern-svg" viewBox="0 0 24 24"><path d="M12,2L9,5H15L12,2M8,6V18H9V19H15V18H16V6H8M11,14H13V16H11V14M11,8H13V12H11V8Z"/></svg>
         </div>
+        
         <div class="welcome-card">
-            <div class="joy-title">🌙 أهلاً رمضان 2026 🌙</div>
+            <div class="joy-title">🌙 أهلاً رمضان 🌙</div>
             <h2 style="margin-bottom: 10px;">أهلاً بك أيها الرائد الكريم.. أهلاً بكِ أيتها الرائدة المبدعة</h2>
-            <p style="font-size: 1.1rem; opacity: 0.9;">اضغط أدناه لتفعيل "بهجة رمضان" ونسخ الرابط لفتحه في هاتفك</p>
+            <p style="font-size: 1.2rem; opacity: 0.9;">اضغط أدناه للاستماع للأغنية الرسمية الأصلية وفتح بوابة المتجر</p>
             
-            <button class="btn-play" id="actionBtn" onclick="playAndCopy()">🎶 تشغيل "أهلاً رمضان" ونسخ الرابط</button>
+            <button class="btn-start" onclick="activateRamadan()">🎵 تشغيل البهجة الأصلية والدخول</button>
         </div>
     </div>
 
     <div id="mobile-loader">
         <div style="text-align: center;">
-            <div style="border: 4px solid var(--gold); border-top: 4px solid transparent; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: auto;"></div>
-            <p style="margin-top:20px; font-weight: bold;">جاري تحويل الرائد لبيئة Pi الآمنة...</p>
+            <div style="border: 5px solid var(--gold); border-top: 5px solid transparent; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: auto;"></div>
+            <p style="margin-top:20px;">جاري تحويلك لبيئة Pi الآمنة...</p>
         </div>
     </div>
 
     <script>
-        function playAndCopy() {
-            // تشغيل الصوت فور الضغط (تفاعل مستخدم)
-            const audio = document.getElementById('ramadanAudio');
-            audio.play().catch(e => {
-                console.log("فشل تشغيل الصوت، تأكد من اتصال الإنترنت");
-            });
+        function activateRamadan() {
+            // إجبار المتصفح على تشغيل الأغنية الأصلية
+            const audio = document.getElementById('ramadanOldie');
+            audio.play().catch(e => console.log("تأكد من اتصال الإنترنت"));
+
+            // نسخ الرابط تلقائياً
+            navigator.clipboard.writeText("https://bmmanagermarket0611.pinet.com");
             
-            // نسخ رابط المتجر
-            const appUrl = "https://bmmanagermarket0611.pinet.com";
-            navigator.clipboard.writeText(appUrl);
-            
-            // تحديث الزر لإظهار النجاح
-            const btn = document.getElementById('actionBtn');
-            btn.innerText = "✨ تم النسخ والاستماع.. ننتظركم في الهاتف ✨";
-            btn.style.background = "#4ade80"; 
-            btn.style.color = "#fff";
+            const btn = document.querySelector('.btn-start');
+            btn.innerText = "✨ نورتنا.. تم تشغيل الأغنية ونسخ الرابط ✨";
+            btn.style.background = "#4ade80";
         }
 
-        function checkDevice() {
+        window.onload = function() {
             const ua = navigator.userAgent;
             const isMobile = /iPhone|iPad|iPod|Android/i.test(ua);
-            const isPiBrowser = ua.includes("PiBrowser");
-
-            if (isPiBrowser) {
-                // إذا كان داخل الباي براوزر، لا يظهر هذه الواجهة
-                document.getElementById('pc-interface').style.display = 'none';
-            } else if (isMobile) {
-                // إذا كان موبايل خارج الباي، يحوله تلقائياً
+            if (isMobile) {
                 document.getElementById('mobile-loader').style.display = 'flex';
-                setTimeout(() => { 
-                    window.location.href = "pi://bmmanagermarket0611.pinet.com"; 
-                }, 800);
+                setTimeout(() => { window.location.href = "pi://bmmanagermarket0611.pinet.com"; }, 800);
             } else {
-                // إذا كان كمبيوتر، يظهر واجهة البهجة الرمضانية
                 document.getElementById('pc-interface').style.display = 'flex';
             }
-        }
-
-        window.onload = checkDevice;
+        };
     </script>
 </body>
 </html>
