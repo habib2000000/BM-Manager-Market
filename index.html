@@ -20,7 +20,6 @@
             overflow: hidden; 
         }
         
-        /* خلفية رمضانية متدرجة تمنع ظهور شاشة زرقاء فارغة */
         .ramadan-bg { 
             position: fixed; 
             inset: 0; 
@@ -28,7 +27,6 @@
             z-index: -1; 
         }
         
-        /* الكارت الترحيبي الرئيسي */
         .welcome-card { 
             background: rgba(255, 255, 255, 0.1); 
             backdrop-filter: blur(15px); 
@@ -41,7 +39,6 @@
             z-index: 10; 
         }
         
-        /* فوانيس ذهبية برمجية - حل نهائي لمشكلة الصور المكسورة */
         .lanterns { display: flex; gap: 60px; justify-content: center; margin-bottom: 25px; }
         .lantern-svg { 
             width: 70px; 
@@ -55,7 +52,6 @@
             50% { transform: rotate(12deg); } 
         }
 
-        /* زر تفعيل البهجة الذهبي */
         .btn-joy { 
             background: var(--gold); 
             color: var(--primary); 
@@ -77,7 +73,7 @@
     <div class="ramadan-bg"></div>
     
     <audio id="ramadanAudio" loop preload="auto">
-        <source src="Welcome Ramadan.mp3" type="audio/mpeg">
+        <source src="Welcome%20Ramadan.mp3" type="audio/mpeg">
     </audio>
 
     <div class="welcome-card">
@@ -99,21 +95,20 @@
         function activateJoy() {
             const audio = document.getElementById('ramadanAudio');
             
-            // تشغيل الأغنية المرفوعة بعد تفاعل المستخدم
+            // تشغيل الأغنية المرفوعة فور الضغط لتجاوز حماية المتصفح
             audio.play().then(() => {
                 const btn = document.getElementById('joyBtn');
                 btn.innerText = "✨ تم التشغيل والنسخ بنجاح ✨";
                 btn.style.background = "#4ade80";
                 btn.style.color = "#fff";
             }).catch(e => {
-                alert("يرجى التأكد من تشغيل الموقع عبر رابط GitHub Pages المباشر.");
+                alert("تأكد من وجود ملف Welcome Ramadan.mp3 بجانب هذا الملف في GitHub.");
             });
 
             // نسخ الرابط لفتحه في بيئة Pi Browser
             navigator.clipboard.writeText("https://bmmanagermarket0611.pinet.com");
         }
 
-        // تحويل تلقائي لمستخدمي الموبايل لضمان عمل الكاميرا في Pi
         window.onload = function() {
             const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
             if (isMobile) {
