@@ -7,21 +7,69 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #6b21a8; --gold: #fbbf24; }
-        body { font-family: 'Cairo', sans-serif; margin: 0; background-color: #0f172a; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; text-align: center; overflow: hidden; }
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            margin: 0; 
+            background-color: #0f172a; 
+            color: white; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            height: 100vh; 
+            text-align: center; 
+            overflow: hidden; 
+        }
         
-        /* خلفية رمضانية متدرجة */
-        .ramadan-bg { position: fixed; inset: 0; background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 100%); z-index: -1; }
+        /* خلفية رمضانية متدرجة تمنع ظهور شاشة زرقاء فارغة */
+        .ramadan-bg { 
+            position: fixed; 
+            inset: 0; 
+            background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 100%); 
+            z-index: -1; 
+        }
         
-        /* الكارت الرئيسي */
-        .welcome-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); border: 2px solid var(--gold); border-radius: 35px; padding: 45px; max-width: 600px; box-shadow: 0 0 50px rgba(0,0,0,0.6); position: relative; z-index: 10; }
+        /* الكارت الترحيبي الرئيسي */
+        .welcome-card { 
+            background: rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(15px); 
+            border: 2px solid var(--gold); 
+            border-radius: 35px; 
+            padding: 45px; 
+            max-width: 600px; 
+            box-shadow: 0 0 50px rgba(0,0,0,0.6); 
+            position: relative; 
+            z-index: 10; 
+        }
         
-        /* فوانيس ذهبية برمجية - حل نهائي للصور المكسورة */
+        /* فوانيس ذهبية برمجية - حل نهائي لمشكلة الصور المكسورة */
         .lanterns { display: flex; gap: 60px; justify-content: center; margin-bottom: 25px; }
-        .lantern-svg { width: 70px; height: 90px; fill: var(--gold); filter: drop-shadow(0 0 15px var(--gold)); animation: swing 3s infinite ease-in-out; }
-        @keyframes swing { 0%, 100% { transform: rotate(-12deg); transform-origin: top center; } 50% { transform: rotate(12deg); } }
+        .lantern-svg { 
+            width: 70px; 
+            height: 90px; 
+            fill: var(--gold); 
+            filter: drop-shadow(0 0 15px var(--gold)); 
+            animation: swing 3s infinite ease-in-out; 
+        }
+        @keyframes swing { 
+            0%, 100% { transform: rotate(-12deg); transform-origin: top center; } 
+            50% { transform: rotate(12deg); } 
+        }
 
-        /* الزر الذهبي */
-        .btn-joy { background: var(--gold); color: var(--primary); border: none; padding: 20px 50px; border-radius: 50px; font-weight: bold; font-size: 1.4rem; cursor: pointer; transition: 0.4s; margin-top: 25px; width: 100%; box-shadow: 0 5px 15px rgba(251, 191, 36, 0.4); }
+        /* زر تفعيل البهجة الذهبي */
+        .btn-joy { 
+            background: var(--gold); 
+            color: var(--primary); 
+            border: none; 
+            padding: 20px 50px; 
+            border-radius: 50px; 
+            font-weight: bold; 
+            font-size: 1.4rem; 
+            cursor: pointer; 
+            transition: 0.4s; 
+            margin-top: 25px; 
+            width: 100%; 
+            box-shadow: 0 5px 15px rgba(251, 191, 36, 0.4); 
+        }
         .btn-joy:hover { transform: scale(1.05); background: #fff; box-shadow: 0 0 30px var(--gold); }
     </style>
 </head>
@@ -39,7 +87,10 @@
         </div>
         
         <h1 style="color: var(--gold); font-size: 2.3rem; margin: 0 0 15px 0;">🌙 أهلاً رمضان 2026 🌙</h1>
-        <p style="font-size: 1.2rem; opacity: 0.9; line-height: 1.6;">أهلاً بك أيها الرائد الكريم في <b>BM Manager Market</b><br>اضغط أدناه لتشغيل البهجة الرمضانية وفتح بوابة المتجر</p>
+        <p style="font-size: 1.2rem; opacity: 0.9; line-height: 1.6;">
+            أهلاً بك أيها الرائد الكريم في <b>BM Manager Market</b><br>
+            اضغط أدناه لتشغيل البهجة الرمضانية وفتح بوابة المتجر
+        </p>
         
         <button class="btn-joy" id="joyBtn" onclick="activateJoy()">🎶 تشغيل "أهلاً رمضان" والدخول 🚀</button>
     </div>
@@ -48,21 +99,21 @@
         function activateJoy() {
             const audio = document.getElementById('ramadanAudio');
             
-            // "إجبار" المتصفح على تشغيل ملفك المرفوع فور الضغط
+            // تشغيل الأغنية المرفوعة بعد تفاعل المستخدم
             audio.play().then(() => {
                 const btn = document.getElementById('joyBtn');
-                btn.innerText = "✨ نورتنا.. تم التشغيل والنسخ ✨";
+                btn.innerText = "✨ تم التشغيل والنسخ بنجاح ✨";
                 btn.style.background = "#4ade80";
                 btn.style.color = "#fff";
             }).catch(e => {
-                alert("يرجى التأكد من تشغيل الرابط المنشور على الإنترنت.");
+                alert("يرجى التأكد من تشغيل الموقع عبر رابط GitHub Pages المباشر.");
             });
 
-            // نسخ رابط المتجر تلقائياً للرائد
+            // نسخ الرابط لفتحه في بيئة Pi Browser
             navigator.clipboard.writeText("https://bmmanagermarket0611.pinet.com");
         }
 
-        // التحويل التلقائي لمستخدمي الهاتف لضمان عمل الكاميرا
+        // تحويل تلقائي لمستخدمي الموبايل لضمان عمل الكاميرا في Pi
         window.onload = function() {
             const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
             if (isMobile) {
