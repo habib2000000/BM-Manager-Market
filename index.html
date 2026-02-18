@@ -1,1 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BM Manager Market | بوابة الإيكوسيستيم</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary-purple: #6b21a8; --gold: #fbbf24; --deep-purple: #4c1d95; }
+        body { font-family: 'Cairo', sans-serif; background-color: #f3f4f6; margin: 0; overflow-x: hidden; }
+        
+        /* واجهة بهجة رمضان 2026 */
+        .ramadan-header {
+            background: linear-gradient(135deg, var(--primary-purple), var(--deep-purple));
+            color: white; padding: 30px 20px; text-align: center; position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); border-bottom: 3px solid var(--gold);
+        }
+        
+        /* زينة رمضان المتحركة */
+        .lantern { position: absolute; top: 5px; width: 45px; animation: swing 3s infinite ease-in-out; z-index: 10; }
+        .stars { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.3; pointer-events: none; }
+        
+        @keyframes swing {
+            0%, 100% { transform: rotate(-12deg); transform-origin: top center; }
+            50% { transform: rotate(12deg); transform-origin: top center; }
+        }
 
+        .joy-timer { 
+            background: rgba(255, 255, 255, 0.1); display: inline-block; padding: 5px 15px;
+            border-radius: 20px; border: 1px solid var(--gold); color: var(--gold);
+            font-weight: bold; margin-top: 10px; font-size: 0.9rem;
+        }
+
+        /* حاوية الأزرار والدخول */
+        .main-container { padding: 25px; text-align: center; }
+        .welcome-card {
+            background: white; border-radius: 20px; padding: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-top: -40px; position: relative; z-index: 20;
+        }
+
+        .btn-ecosystem {
+            display: block; width: 100%; max-width: 300px; margin: 20px auto; padding: 18px;
+            background: var(--gold); color: var(--deep-purple); border: none;
+            border-radius: 15px; font-size: 1.2rem; font-weight: bold; cursor: pointer;
+            box-shadow: 0 5px 15px rgba(251, 191, 36, 0.4); transition: transform 0.2s;
+        }
+        .btn-ecosystem:active { transform: scale(0.95); }
+
+        .footer-note { font-size: 0.8rem; color: #666; margin-top: 15px; }
+    </style>
+</head>
+<body>
+
+    <header class="ramadan-header">
+        <img src="https://img.icons8.com/color/96/ramadan-lantern.png" class="lantern" style="right: 15px;">
+        <img src="https://img.icons8.com/color/96/ramadan-lantern.png" class="lantern" style="left: 15px;">
+        <div class="stars">✨ ✨ ✨</div>
+        
+        <h2 style="margin: 0; font-size: 1.5rem;">رمضان كريم 2026</h2>
+        <p style="margin: 5px 0; opacity: 0.9;">مرحباً بكم في BM Manager Market</p>
+        <div class="joy-timer">⏳ متبقي على أيام البهجة: 35 يوم</div>
+    </header>
+
+    <div class="main-container">
+        <div class="welcome-card">
+            <h3 style="color: var(--deep-purple); margin-top: 0;">دخول التاجر الذكي</h3>
+            <p style="color: #444; font-size: 0.95rem;">للاستمتاع بميزات الجرد البصري (AR) ونظام SCP، يرجى الانتقال للتطبيق الرسمي عبر الإيكوسيستيم</p>
+            
+            <button class="btn-ecosystem" onclick="enterEcosystem()">
+                🔓 دخول الإيكوسيستيم
+            </button>
+            
+            <div class="footer-note">
+                🔒 اتصال مؤمن عبر Pi Network (HTTPS)
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function enterEcosystem() {
+            // التوجيه المباشر لرابط الإيكوسيستيم الرسمي الخاص بك
+            const officialUrl = "https://bmmanagermarket0611.pinet.com";
+            
+            console.log("جاري التوجيه إلى بيئة Pi الآمنة...");
+            window.location.href = officialUrl;
+        }
+
+        // إضافة لمسة جمالية عند التحميل
+        window.onload = () => {
+            console.log("BM Manager Market - Ramadan Edition Active");
+        };
+    </script>
+</body>
+</html>
