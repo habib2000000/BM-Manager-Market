@@ -6,108 +6,94 @@
     <title>BM Manager Market | بوابة الرواد</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #6b21a8; --gold: #fbbf24; --deep-purple: #4c1d95; }
-        body { font-family: 'Cairo', sans-serif; margin: 0; background-color: #0f172a; color: white; overflow-x: hidden; }
+        :root { --primary: #6b21a8; --gold: #fbbf24; }
+        body { font-family: 'Cairo', sans-serif; margin: 0; background-color: #0f172a; color: white; overflow: hidden; }
 
-        /* خلفية رمضانية ساحرة */
-        .pc-bg {
+        /* خلفية البهجة الرمضانية */
+        .ramadan-bg {
             position: fixed; inset: 0; 
-            background: linear-gradient(rgba(10, 10, 30, 0.85), rgba(76, 29, 149, 0.7)), 
-                        url('https://www.transparenttextures.com/patterns/dark-matter.png');
+            background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 100%);
             z-index: -1;
         }
 
-        .container { display: none; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center; padding: 20px; }
+        .container { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center; padding: 20px; }
 
-        /* زينة رمضان (أيقونات SVG ثابتة لا تنكسر) */
-        .lantern-container { display: flex; gap: 60px; margin-bottom: 20px; }
-        .lantern-svg { width: 70px; height: 90px; fill: var(--gold); filter: drop-shadow(0 0 10px var(--gold)); animation: swing 3s infinite ease-in-out; }
-        
-        @keyframes swing {
-            0%, 100% { transform: rotate(-10deg); transform-origin: top center; }
-            50% { transform: rotate(10deg); transform-origin: top center; }
-        }
+        /* فوانيس SVG لا تنكسر أبداً */
+        .lanterns { display: flex; gap: 50px; margin-bottom: 20px; }
+        .lantern-svg { width: 60px; height: 80px; fill: var(--gold); filter: drop-shadow(0 0 10px var(--gold)); animation: swing 3s infinite ease-in-out; }
+        @keyframes swing { 0%, 100% { transform: rotate(-10deg); transform-origin: top; } 50% { transform: rotate(10deg); } }
 
-        /* كارت الترحيب الفخم */
         .welcome-card {
-            background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px);
-            border: 2px solid var(--gold); border-radius: 35px; padding: 40px;
-            max-width: 650px; box-shadow: 0 0 40px rgba(251, 191, 36, 0.15);
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px);
+            border: 2px solid var(--gold); border-radius: 30px; padding: 35px;
+            max-width: 500px; box-shadow: 0 0 40px rgba(0,0,0,0.5);
         }
 
-        .joy-title { color: var(--gold); font-size: 1.8rem; margin-bottom: 15px; text-shadow: 0 0 15px rgba(251, 191, 36, 0.6); }
-        
-        .step-card { 
-            display: flex; align-items: center; gap: 20px; background: rgba(0,0,0,0.4); 
-            padding: 20px; border-radius: 20px; margin: 15px 0; text-align: right; 
-            border-right: 4px solid var(--gold);
-        }
-
-        .btn-copy {
+        .btn-direct {
             background: var(--gold); color: var(--primary); border: none;
-            padding: 18px 40px; border-radius: 50px; font-weight: bold; font-size: 1.2rem;
-            cursor: pointer; transition: 0.4s; margin-top: 25px; width: 100%;
+            padding: 18px 30px; border-radius: 50px; font-weight: bold; font-size: 1.2rem;
+            cursor: pointer; transition: 0.3s; margin-top: 20px; width: 100%;
+            text-decoration: none; display: inline-block;
         }
-        .btn-copy:hover { transform: scale(1.03); box-shadow: 0 0 25px var(--gold); }
-
-        #app-content { display: none; }
+        
+        #status-msg { margin-top: 15px; color: var(--gold); font-weight: bold; font-size: 0.9rem; }
     </style>
 </head>
 <body>
-    <div class="pc-bg"></div>
+    <div class="ramadan-bg"></div>
 
-    <div id="redirect-ui" class="container">
-        <div class="lantern-container">
+    <div class="container" id="main-ui">
+        <div class="lanterns">
             <svg class="lantern-svg" viewBox="0 0 24 24"><path d="M12,2L9,5H15L12,2M8,6V18H9V19H15V18H16V6H8M11,14H13V16H11V14M11,8H13V12H11V8Z"/></svg>
             <svg class="lantern-svg" viewBox="0 0 24 24"><path d="M12,2L9,5H15L12,2M8,6V18H9V19H15V18H16V6H8M11,14H13V16H11V14M11,8H13V12H11V8Z"/></svg>
         </div>
-        
+
         <div class="welcome-card">
-            <div class="joy-title">🌙 رمضان كريم 2026 🌙</div>
-            <h2 style="margin-bottom: 10px;">أهلاً بك أيها الرائد الكريم.. أهلاً بكِ أيتها الرائدة المبدعة</h2>
-            <p style="opacity: 0.9; font-size: 1.1rem;">نسعد بزيارتكم لـ <b>BM Manager Market</b>، رفيقكم الذكي في عالم التجارة الرقمية.</p>
+            <h2 style="color: var(--gold); margin-top: 0;">🌙 رمضان كريم 2026 🌙</h2>
+            <h3 id="welcome-text">أهلاً بك أيها الرائد الكريم..</h3>
+            <p id="desc-text">جاري تحويلك الآن إلى التطبيق الرسمي داخل <b>Pi Browser</b> لتفعيل الكاميرا والمستشعرات...</p>
             
-            <div class="step-card">
-                <span style="font-size: 2rem;">📱</span>
-                <span>لتفعيل ميزات <b>الجرد البصري (AR)</b> والدخول إلى <b>App Studio</b>، نرجو من سيادتكم الانتقال إلى الهاتف المحمول.</span>
-            </div>
-
-            <div class="step-card">
-                <span style="font-size: 2rem;">🥧</span>
-                <span>يرجى نسخ الرابط أدناه وفتحه حصراً داخل متصفح <b>Pi Browser</b> لضمان أمان حسابكم وعمل المستشعرات.</span>
-            </div>
-
-            <button class="btn-copy" onclick="copyAndNotify()">📋 نسخ رابط الإيكوسيستيم للهاتف</button>
-            <p id="copy-status" style="margin-top: 15px; color: #4ade80; font-weight: bold; display: none;">✨ تم نسخ الرابط بنجاح! ننتظركم في Pi Browser ✨</p>
+            <a href="pi://bmmanagermarket0611.pinet.com" class="btn-direct" id="action-btn">دخول تلقائي للتطبيق 🚀</a>
+            
+            <div id="status-msg">إذا لم يتم التحويل تلقائياً، اضغط على الزر أعلاه</div>
         </div>
-    </div>
-
-    <div id="app-content">
-        <h2 style="text-align: center; padding-top: 100px;">مرحباً بك داخل بيئة Pi الرسمية ✅</h2>
     </div>
 
     <script>
-        function initApp() {
+        const appUrl = "bmmanagermarket0611.pinet.com";
+        const piProtocolUrl = "pi://" + appUrl;
+
+        function autoRedirect() {
             const ua = navigator.userAgent;
-            const isPiBrowser = ua.includes("PiBrowser") || window.location.href.includes("pinet.com");
-            
+            const isPiBrowser = ua.includes("PiBrowser");
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(ua);
+
+            // إذا كان المستخدم بالفعل داخل Pi Browser
             if (isPiBrowser) {
-                document.getElementById('app-content').style.display = 'block';
+                window.location.href = "https://" + appUrl;
+                return;
+            }
+
+            // إذا كان المستخدم على هاتف (خارج Pi Browser)
+            if (isMobile) {
+                // محاولة التحويل التلقائي لبروتوكول Pi
+                setTimeout(() => {
+                    window.location.href = piProtocolUrl;
+                }, 1500);
             } else {
-                document.getElementById('redirect-ui').style.display = 'flex';
+                // إذا كان مستخدم كمبيوتر
+                document.getElementById('welcome-text').innerText = "أهلاً بك يا باشا الرائد!";
+                document.getElementById('desc-text').innerText = "هذا التطبيق مخصص للهواتف لتفعيل ميزات الجرد البصري (AR). يرجى مسح الرابط بهاتفك أو فتحه في Pi Browser.";
+                document.getElementById('action-btn').innerText = "نسخ رابط الهاتف 📋";
+                document.getElementById('action-btn').onclick = function(e) {
+                    e.preventDefault();
+                    navigator.clipboard.writeText("https://" + appUrl);
+                    alert("تم نسخ الرابط! افتحه في Pi Browser على هاتفك.");
+                }
             }
         }
 
-        function copyAndNotify() {
-            const link = "https://bmmanagermarket0611.pinet.com";
-            navigator.clipboard.writeText(link).then(() => {
-                const status = document.getElementById('copy-status');
-                status.style.display = 'block';
-                setTimeout(() => status.style.display = 'none', 4000);
-            });
-        }
-
-        window.onload = initApp;
+        window.onload = autoRedirect;
     </script>
 </body>
 </html>
