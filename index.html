@@ -3,81 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BM Manager Market | الذكاء النجمي</title>
+    <title>BM Manager Market | بوابة الرواد</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary-purple: #6b21a8; --gold: #fbbf24; }
-        body { font-family: 'Cairo', sans-serif; background-color: #f3f4f6; margin: 0; }
-        
-        /* رسائل التوجيه الذكية */
-        .redirect-box { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; padding: 30px; }
-        .btn-copy { background: var(--gold); color: var(--primary-purple); border: none; padding: 10px 20px; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 15px; }
-        
-        /* واجهة التطبيق (تظهر فقط في البيئة الصحيحة) */
-        #app-content { display: none; }
-        
-        /* بهجة رمضان */
-        .ramadan-header { background: var(--primary-purple); color: white; padding: 20px; text-align: center; position: relative; }
-        .lantern { position: absolute; top: 5px; width: 40px; animation: swing 3s infinite ease-in-out; }
+        :root { --primary: #6b21a8; --gold: #fbbf24; --text-light: #fefce8; }
+        body { font-family: 'Cairo', sans-serif; margin: 0; background-color: #0f172a; color: white; overflow-x: hidden; }
+
+        /* خلفية رمضانية حية للكمبيوتر */
+        .pc-bg {
+            position: fixed; inset: 0; 
+            background: linear-gradient(rgba(10, 10, 30, 0.8), rgba(107, 33, 168, 0.6)), 
+                        url('https://www.transparenttextures.com/patterns/stardust.png');
+            z-index: -1;
+        }
+
+        .container { display: none; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center; padding: 20px; }
+
+        /* زينة رمضان */
+        .lantern-box { display: flex; gap: 40px; margin-bottom: 20px; }
+        .lantern { width: 60px; animation: swing 3s infinite ease-in-out; }
         @keyframes swing { 0%, 100% { transform: rotate(-10deg); } 50% { transform: rotate(10deg); } }
+
+        /* كارت التوجيه الراقي */
+        .welcome-card {
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
+            border: 2px solid var(--gold); border-radius: 30px; padding: 40px;
+            max-width: 600px; box-shadow: 0 0 30px rgba(251, 191, 36, 0.2);
+        }
+
+        .joy-text { color: var(--gold); font-size: 1.5rem; margin-bottom: 10px; text-shadow: 0 0 10px rgba(251, 191, 36, 0.5); }
+        .instruction-step { display: flex; align-items: center; gap: 15px; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 15px; margin: 10px 0; text-align: right; }
+        
+        .btn-copy {
+            background: var(--gold); color: var(--primary); border: none;
+            padding: 15px 30px; border-radius: 50px; font-weight: bold; font-size: 1.1rem;
+            cursor: pointer; transition: 0.3s; margin-top: 20px;
+        }
+        .btn-copy:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--gold); }
+
+        /* واجهة التطبيق داخل Pi Browser */
+        #app-content { display: none; }
     </style>
 </head>
 <body>
+    <div class="pc-bg"></div>
 
-    <div id="pc-warning" class="redirect-box">
-        <img src="https://img.icons8.com/fluency/96/laptop.png" width="80">
-        <h2 style="color: var(--primary-purple);">أهلاً بك يا باشا من الكمبيوتر!</h2>
-        <p>لتفعيل ميزات الجرد البصري (AR) والدخول على <b>App Studio</b>، يرجى فتح الرابط من هاتفك المحمول.</p>
-        <div style="background: #eee; padding: 10px; border-radius: 5px; word-break: break-all;" id="link-text">
-            https://bmmanagermarket0611.pinet.com
+    <div id="redirect-ui" class="container">
+        <div class="lantern-box">
+            <img src="https://img.icons8.com/color/96/ramadan-lantern.png" class="lantern">
+            <img src="https://img.icons8.com/color/96/ramadan-lantern.png" class="lantern">
         </div>
-        <button class="btn-copy" onclick="copyLink()">نسخ الرابط للهاتف</button>
-    </div>
+        
+        <div class="welcome-card">
+            <div class="joy-text">🌙 رمضان كريم 2026 🌙</div>
+            <h2 style="margin-bottom: 5px;">أهلاً بك أيها الرائد الكريم.. أهلاً بكِ أيتها الرائدة المبدعة</h2>
+            <p style="opacity: 0.8;">نسعد بزيارتكم لـ <b>BM Manager Market</b>، رفيقكم الذكي في عالم التجارة الرقمية.</p>
+            
+            <hr style="border: 0; border-top: 1px solid rgba(251,191,36,0.3); margin: 20px 0;">
+            
+            <div class="instruction-step">
+                <span style="font-size: 1.5rem;">📱</span>
+                <span>لتفعيل ميزات <b>الجرد البصري (AR)</b> والدخول إلى <b>App Studio</b>، نرجو من سيادتكم الانتقال إلى الهاتف المحمول.</span>
+            </div>
 
-    <div id="mobile-warning" class="redirect-box">
-        <img src="https://img.icons8.com/fluency/96/smartphone.png" width="80">
-        <h2 style="color: var(--primary-purple);">خطوة واحدة متبقية!</h2>
-        <p>يرجى نسخ الرابط وفتحه داخل متصفح <b>Pi Browser</b> للوصول الكامل لمستشعرات الكاميرا والكشاف.</p>
-        <button class="btn-copy" onclick="copyLink()">نسخ الرابط لفتحه في Pi Browser</button>
+            <div class="instruction-step">
+                <span style="font-size: 1.5rem;">🥧</span>
+                <span>يرجى نسخ الرابط أدناه وفتحه حصراً داخل متصفح <b>Pi Browser</b> لضمان أمان حسابكم وعمل المستشعرات.</span>
+            </div>
+
+            <button class="btn-copy" onclick="copyAndNotify()">📋 نسخ رابط الإيكوسيستيم</button>
+            <p id="copy-status" style="margin-top: 10px; color: #4ade80; display: none;">تم نسخ الرابط بنجاح! ننتظركم في Pi Browser ✨</p>
+        </div>
     </div>
 
     <div id="app-content">
-        <div class="ramadan-header">
-            <img src="https://img.icons8.com/color/96/ramadan-lantern.png" class="lantern" style="right: 10px;">
-            <h2>رمضان كريم 2026 🌙</h2>
-            <div style="color: var(--gold);">متبقي من أيام البهجة: 35 يوم</div>
-        </div>
-        <div style="padding: 20px; text-align: center;">
-             <h3>نظام BM Manager Market نشط ✅</h3>
-             <p>أنت الآن داخل بيئة Pi الرسمية.</p>
-        </div>
+        <h2 style="text-align: center; padding-top: 50px;">مرحباً بك داخل بيئة Pi الرسمية ✅</h2>
     </div>
 
     <script>
-        function checkEnvironment() {
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            const isPiBrowser = userAgent.includes("PiBrowser") || window.location.href.includes("pinet.com");
-            const isMobile = /android|iphone|kindle|ipad/i.test(userAgent);
-
+        function initApp() {
+            const ua = navigator.userAgent;
+            const isPiBrowser = ua.includes("PiBrowser") || window.location.href.includes("pinet.com");
+            
             if (isPiBrowser) {
-                // دخول آمن من المتصفح الرسمي
                 document.getElementById('app-content').style.display = 'block';
-            } else if (!isMobile) {
-                // مستخدم كمبيوتر
-                document.getElementById('pc-warning').style.display = 'flex';
             } else {
-                // مستخدم هاتف ولكن من متصفح عادي (كروم/سفاري)
-                document.getElementById('mobile-warning').style.display = 'flex';
+                document.getElementById('redirect-ui').style.display = 'flex';
             }
         }
 
-        function copyLink() {
+        function copyAndNotify() {
             const link = "https://bmmanagermarket0611.pinet.com";
-            navigator.clipboard.writeText(link);
-            alert("تم نسخ الرابط! افتحه الآن في Pi Browser على هاتفك.");
+            navigator.clipboard.writeText(link).then(() => {
+                const status = document.getElementById('copy-status');
+                status.style.display = 'block';
+                setTimeout(() => status.style.display = 'none', 3000);
+            });
         }
 
-        window.onload = checkEnvironment;
+        window.onload = initApp;
     </script>
 </body>
 </html>
