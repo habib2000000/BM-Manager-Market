@@ -1,2 +1,5 @@
+<audio id="ramadanAudio" loop preload="auto">
+    <source src="Welcome Ramadan.mp3" type="audio/mpeg">
+</audio>
 
 
