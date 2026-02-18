@@ -7,73 +7,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #6b21a8; --gold: #fbbf24; }
-        body { 
-            font-family: 'Cairo', sans-serif; 
-            margin: 0; 
-            background-color: #0f172a; 
-            color: white; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            height: 100vh; 
-            text-align: center; 
-            overflow: hidden; 
-        }
-        
-        .ramadan-bg { 
-            position: fixed; 
-            inset: 0; 
-            background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 100%); 
-            z-index: -1; 
-        }
-        
-        .welcome-card { 
-            background: rgba(255, 255, 255, 0.1); 
-            backdrop-filter: blur(15px); 
-            border: 2px solid var(--gold); 
-            border-radius: 35px; 
-            padding: 45px; 
-            max-width: 600px; 
-            box-shadow: 0 0 50px rgba(0,0,0,0.6); 
-            position: relative; 
-            z-index: 10; 
-        }
-        
+        body { font-family: 'Cairo', sans-serif; margin: 0; background-color: #0f172a; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; text-align: center; overflow: hidden; }
+        .ramadan-bg { position: fixed; inset: 0; background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 100%); z-index: -1; }
+        .welcome-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); border: 2px solid var(--gold); border-radius: 35px; padding: 45px; max-width: 600px; box-shadow: 0 0 50px rgba(0,0,0,0.6); position: relative; z-index: 10; }
         .lanterns { display: flex; gap: 60px; justify-content: center; margin-bottom: 25px; }
-        .lantern-svg { 
-            width: 70px; 
-            height: 90px; 
-            fill: var(--gold); 
-            filter: drop-shadow(0 0 15px var(--gold)); 
-            animation: swing 3s infinite ease-in-out; 
-        }
-        @keyframes swing { 
-            0%, 100% { transform: rotate(-12deg); transform-origin: top center; } 
-            50% { transform: rotate(12deg); } 
-        }
-
-        .btn-joy { 
-            background: var(--gold); 
-            color: var(--primary); 
-            border: none; 
-            padding: 20px 50px; 
-            border-radius: 50px; 
-            font-weight: bold; 
-            font-size: 1.4rem; 
-            cursor: pointer; 
-            transition: 0.4s; 
-            margin-top: 25px; 
-            width: 100%; 
-            box-shadow: 0 5px 15px rgba(251, 191, 36, 0.4); 
-        }
-        .btn-joy:hover { transform: scale(1.05); background: #fff; box-shadow: 0 0 30px var(--gold); }
+        .lantern-svg { width: 70px; height: 90px; fill: var(--gold); filter: drop-shadow(0 0 15px var(--gold)); animation: swing 3s infinite ease-in-out; }
+        @keyframes swing { 0%, 100% { transform: rotate(-12deg); transform-origin: top center; } 50% { transform: rotate(12deg); } }
+        .btn-joy { background: var(--gold); color: var(--primary); border: none; padding: 20px 50px; border-radius: 50px; font-weight: bold; font-size: 1.4rem; cursor: pointer; transition: 0.4s; margin-top: 25px; width: 100%; box-shadow: 0 5px 15px rgba(251, 191, 36, 0.4); }
+        .btn-joy:hover { transform: scale(1.05); background: #fff; }
     </style>
 </head>
 <body>
     <div class="ramadan-bg"></div>
     
     <audio id="ramadanAudio" loop preload="auto">
-        <source src="Welcome%20Ramadan.mp3" type="audio/mpeg">
+        <source src="Welcome%20Ramadan.mp3.mp3" type="audio/mpeg">
     </audio>
 
     <div class="welcome-card">
@@ -81,37 +29,24 @@
             <svg class="lantern-svg" viewBox="0 0 24 24"><path d="M12,2L9,5H15L12,2M8,6V18H9V19H15V18H16V6H8M11,14H13V16H11V14M11,8H13V12H11V8Z"/></svg>
             <svg class="lantern-svg" viewBox="0 0 24 24"><path d="M12,2L9,5H15L12,2M8,6V18H9V19H15V18H16V6H8M11,14H13V16H11V14M11,8H13V12H11V8Z"/></svg>
         </div>
-        
         <h1 style="color: var(--gold); font-size: 2.3rem; margin: 0 0 15px 0;">🌙 أهلاً رمضان 2026 🌙</h1>
-        <p style="font-size: 1.2rem; opacity: 0.9; line-height: 1.6;">
-            أهلاً بك أيها الرائد الكريم في <b>BM Manager Market</b><br>
-            اضغط أدناه لتشغيل البهجة الرمضانية وفتح بوابة المتجر
-        </p>
-        
+        <p style="font-size: 1.2rem; opacity: 0.9;">أهلاً بك أيها الرائد الكريم في <b>BM Manager Market</b><br>اضغط أدناه لتشغيل البهجة الرمضانية وفتح بوابة المتجر</p>
         <button class="btn-joy" id="joyBtn" onclick="activateJoy()">🎶 تشغيل "أهلاً رمضان" والدخول 🚀</button>
     </div>
 
     <script>
         function activateJoy() {
             const audio = document.getElementById('ramadanAudio');
-            
-            // تشغيل الأغنية المرفوعة فور الضغط لتجاوز حماية المتصفح
             audio.play().then(() => {
                 const btn = document.getElementById('joyBtn');
-                btn.innerText = "✨ تم التشغيل والنسخ بنجاح ✨";
+                btn.innerText = "✨ نورتنا.. جارِ الاستماع والنسخ ✨";
                 btn.style.background = "#4ade80";
-                btn.style.color = "#fff";
-            }).catch(e => {
-                alert("تأكد من وجود ملف Welcome Ramadan.mp3 بجانب هذا الملف في GitHub.");
-            });
-
-            // نسخ الرابط لفتحه في بيئة Pi Browser
+            }).catch(e => { alert("تأكد من فتح الرابط المنشور والضغط مرة أخرى"); });
             navigator.clipboard.writeText("https://bmmanagermarket0611.pinet.com");
         }
 
         window.onload = function() {
-            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-            if (isMobile) {
+            if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
                 window.location.href = "pi://bmmanagermarket0611.pinet.com";
             }
         };
