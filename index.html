@@ -3,101 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BM Manager Market | Pi Ecosystem</title>
+    <title>BM Manager Market | الذكاء النجمي</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary-purple: #6b21a8; --gold: #fbbf24; --deep-purple: #4c1d95; }
-        body { font-family: 'Cairo', sans-serif; background-color: #f3f4f6; margin: 0; overflow-x: hidden; }
-
-        /* حماية المحتوى: يظهر فقط في Pi Browser */
-        #main-app { display: none; }
-        #browser-warning { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; padding: 20px; }
-
-        /* واجهة رمضان 2026 */
-        .ramadan-header {
-            background: linear-gradient(135deg, var(--primary-purple), var(--deep-purple));
-            color: white; padding: 30px 20px; text-align: center; position: relative;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3); border-bottom: 3px solid var(--gold);
-        }
-        .lantern { position: absolute; top: 5px; width: 45px; animation: swing 3s infinite ease-in-out; }
-        @keyframes swing { 0%, 100% { transform: rotate(-12deg); transform-origin: top center; } 50% { transform: rotate(12deg); transform-origin: top center; } }
+        :root { --primary-purple: #6b21a8; --gold: #fbbf24; }
+        body { font-family: 'Cairo', sans-serif; background-color: #f3f4f6; margin: 0; }
         
-        .joy-timer { border: 1px solid var(--gold); padding: 5px 15px; border-radius: 20px; color: var(--gold); font-weight: bold; margin-top: 10px; display: inline-block; }
-
-        /* حاوية الكاميرا SCP */
-        .scanner-container { width: 90%; max-width: 500px; margin: 20px auto; background: #000; border-radius: 20px; overflow: hidden; position: relative; border: 2px solid white; }
-        #camera-preview { width: 100%; height: auto; display: block; }
-        .camera-overlay { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.6); color: var(--gold); padding: 5px 10px; border-radius: 5px; font-size: 0.8rem; }
-
-        .btn-main { display: block; width: 85%; margin: 20px auto; padding: 18px; background: var(--gold); color: var(--deep-purple); border: none; border-radius: 15px; font-size: 1.2rem; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(251, 191, 36, 0.4); }
+        /* رسائل التوجيه الذكية */
+        .redirect-box { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; padding: 30px; }
+        .btn-copy { background: var(--gold); color: var(--primary-purple); border: none; padding: 10px 20px; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        
+        /* واجهة التطبيق (تظهر فقط في البيئة الصحيحة) */
+        #app-content { display: none; }
+        
+        /* بهجة رمضان */
+        .ramadan-header { background: var(--primary-purple); color: white; padding: 20px; text-align: center; position: relative; }
+        .lantern { position: absolute; top: 5px; width: 40px; animation: swing 3s infinite ease-in-out; }
+        @keyframes swing { 0%, 100% { transform: rotate(-10deg); } 50% { transform: rotate(10deg); } }
     </style>
 </head>
 <body>
 
-    <div id="browser-warning">
-        <h2 style="color: var(--primary-purple);">⚠️ الدخول آمن فقط</h2>
-        <p>يرجى فتح التطبيق من داخل متصفح <b>Pi Browser</b> لضمان تشغيل ميزات الجرد والكشاف بنجاح.</p>
+    <div id="pc-warning" class="redirect-box">
+        <img src="https://img.icons8.com/fluency/96/laptop.png" width="80">
+        <h2 style="color: var(--primary-purple);">أهلاً بك يا باشا من الكمبيوتر!</h2>
+        <p>لتفعيل ميزات الجرد البصري (AR) والدخول على <b>App Studio</b>، يرجى فتح الرابط من هاتفك المحمول.</p>
+        <div style="background: #eee; padding: 10px; border-radius: 5px; word-break: break-all;" id="link-text">
+            https://bmmanagermarket0611.pinet.com
+        </div>
+        <button class="btn-copy" onclick="copyLink()">نسخ الرابط للهاتف</button>
     </div>
 
-    <div id="main-app">
-        <header class="ramadan-header">
-            <img src="https://img.icons8.com/color/96/ramadan-lantern.png" class="lantern" style="right: 15px;">
-            <img src="https://img.icons8.com/color/96/ramadan-lantern.png" class="lantern" style="left: 15px;">
-            <h2 style="margin:0;">رمضان كريم 2026</h2>
-            <div class="joy-timer">⏳ متبقي على أيام البهجة: 35 يوم</div>
-        </header>
+    <div id="mobile-warning" class="redirect-box">
+        <img src="https://img.icons8.com/fluency/96/smartphone.png" width="80">
+        <h2 style="color: var(--primary-purple);">خطوة واحدة متبقية!</h2>
+        <p>يرجى نسخ الرابط وفتحه داخل متصفح <b>Pi Browser</b> للوصول الكامل لمستشعرات الكاميرا والكشاف.</p>
+        <button class="btn-copy" onclick="copyLink()">نسخ الرابط لفتحه في Pi Browser</button>
+    </div>
 
-        <div style="text-align: center; padding: 15px;">
-            <div style="background: white; padding: 10px; border-radius: 10px; display: inline-block;">
-                <span style="color: green;">● حساب محمي</span> | التاجر: <span id="merchant-id">BM-85***</span>
-            </div>
+    <div id="app-content">
+        <div class="ramadan-header">
+            <img src="https://img.icons8.com/color/96/ramadan-lantern.png" class="lantern" style="right: 10px;">
+            <h2>رمضان كريم 2026 🌙</h2>
+            <div style="color: var(--gold);">متبقي من أيام البهجة: 35 يوم</div>
         </div>
-
-        <div class="scanner-container">
-            <div class="camera-overlay">نظام SCP نشط 🛰️</div>
-            <video id="camera-preview" autoplay playsinline muted></video>
-            <div id="loading-msg" style="color:white; text-align:center; padding:50px;">بانتظار تفعيل المستشعرات...</div>
+        <div style="padding: 20px; text-align: center;">
+             <h3>نظام BM Manager Market نشط ✅</h3>
+             <p>أنت الآن داخل بيئة Pi الرسمية.</p>
         </div>
-
-        <button class="btn-main" onclick="startScanner()">بدء الجرد البصري الذكي (AR)</button>
     </div>
 
     <script>
-        // التحقق من المتصفح (Pi Browser فقط)
-        const isPiBrowser = navigator.userAgent.includes("PiBrowser") || window.location.href.includes("pinet.com");
-        if (isPiBrowser) {
-            document.getElementById('browser-warning').style.display = 'none';
-            document.getElementById('main-app').style.display = 'block';
-        }
+        function checkEnvironment() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const isPiBrowser = userAgent.includes("PiBrowser") || window.location.href.includes("pinet.com");
+            const isMobile = /android|iphone|kindle|ipad/i.test(userAgent);
 
-        async function startScanner() {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({
-                    video: { facingMode: "environment" }
-                });
-                
-                const video = document.getElementById('camera-preview');
-                video.srcObject = stream;
-                
-                video.onloadedmetadata = () => {
-                    video.play();
-                    document.getElementById('loading-msg').style.display = 'none';
-                    activateTorch(stream);
-                };
-            } catch (err) {
-                alert("يرجى استخدام رابط HTTPS رسمي ومنح إذن الكاميرا.");
+            if (isPiBrowser) {
+                // دخول آمن من المتصفح الرسمي
+                document.getElementById('app-content').style.display = 'block';
+            } else if (!isMobile) {
+                // مستخدم كمبيوتر
+                document.getElementById('pc-warning').style.display = 'flex';
+            } else {
+                // مستخدم هاتف ولكن من متصفح عادي (كروم/سفاري)
+                document.getElementById('mobile-warning').style.display = 'flex';
             }
         }
 
-        async function activateTorch(stream) {
-            try {
-                const track = stream.getVideoTracks()[0];
-                const capabilities = track.getCapabilities();
-                if (capabilities.torch) {
-                    await track.applyConstraints({ advanced: [{ torch: true }] });
-                }
-            } catch (e) { console.log("الكشاف غير مدعوم حالياً"); }
+        function copyLink() {
+            const link = "https://bmmanagermarket0611.pinet.com";
+            navigator.clipboard.writeText(link);
+            alert("تم نسخ الرابط! افتحه الآن في Pi Browser على هاتفك.");
         }
+
+        window.onload = checkEnvironment;
     </script>
 </body>
 </html>
