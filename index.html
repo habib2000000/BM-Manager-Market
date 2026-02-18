@@ -24,13 +24,13 @@
         .btn-play { background: var(--gold); color: var(--primary); border: none; padding: 18px 45px; border-radius: 50px; font-weight: bold; font-size: 1.3rem; cursor: pointer; transition: 0.4s; margin-top: 25px; width: 100%; box-shadow: 0 5px 15px rgba(251, 191, 36, 0.3); }
         .btn-play:hover { transform: scale(1.03); box-shadow: 0 0 25px var(--gold); }
 
-        /* شاشة التحميل للهاتف */
+        /* شاشة التحويل للهاتف */
         #mobile-loader { display: none; height: 100vh; align-items: center; justify-content: center; background: #0f172a; }
     </style>
 </head>
 <body>
 
-    <audio id="ramadanAudio" loop>
+    <audio id="ramadanAudio" loop preload="auto">
         <source src="https://www.islamic-invitation.com/sounds/ramadan/ahlan-ramadan.mp3" type="audio/mpeg">
     </audio>
 
@@ -43,9 +43,9 @@
         <div class="welcome-card">
             <div class="joy-title">🌙 أهلاً رمضان 2026 🌙</div>
             <h2 style="margin-bottom: 10px;">أهلاً بك أيها الرائد الكريم.. أهلاً بكِ أيتها الرائدة المبدعة</h2>
-            <p style="font-size: 1.1rem; opacity: 0.9;">اضغط أدناه للاستماع لأجواء رمضان ونسخ الرابط لفتحه في هاتفك</p>
+            <p style="font-size: 1.1rem; opacity: 0.9;">اضغط أدناه لتفعيل "بهجة رمضان" ونسخ الرابط لفتحه في هاتفك</p>
             
-            <button class="btn-play" onclick="playWelcome()">🎶 تشغيل "أهلاً رمضان" ونسخ الرابط</button>
+            <button class="btn-play" id="actionBtn" onclick="playAndCopy()">🎶 تشغيل "أهلاً رمضان" ونسخ الرابط</button>
         </div>
     </div>
 
@@ -57,16 +57,22 @@
     </div>
 
     <script>
-        function playWelcome() {
+        function playAndCopy() {
+            // تشغيل الصوت فور الضغط (تفاعل مستخدم)
             const audio = document.getElementById('ramadanAudio');
-            audio.play().catch(e => alert("يرجى التأكد من اتصال الإنترنت لتشغيل الأغنية"));
+            audio.play().catch(e => {
+                console.log("فشل تشغيل الصوت، تأكد من اتصال الإنترنت");
+            });
             
-            // نسخ رابط المتجر تلقائياً
-            navigator.clipboard.writeText("https://bmmanagermarket0611.pinet.com");
+            // نسخ رابط المتجر
+            const appUrl = "https://bmmanagermarket0611.pinet.com";
+            navigator.clipboard.writeText(appUrl);
             
-            const btn = document.querySelector('.btn-play');
+            // تحديث الزر لإظهار النجاح
+            const btn = document.getElementById('actionBtn');
             btn.innerText = "✨ تم النسخ والاستماع.. ننتظركم في الهاتف ✨";
             btn.style.background = "#4ade80"; 
+            btn.style.color = "#fff";
         }
 
         function checkDevice() {
@@ -75,16 +81,16 @@
             const isPiBrowser = ua.includes("PiBrowser");
 
             if (isPiBrowser) {
-                // إذا كان داخل الباي براوزر فعلاً، حوله لصفحة المتجر الرئيسية
-                window.location.href = "store.html"; 
+                // إذا كان داخل الباي براوزر، لا يظهر هذه الواجهة
+                document.getElementById('pc-interface').style.display = 'none';
             } else if (isMobile) {
-                // إذا كان موبايل، حوله تلقائياً لبروتوكول Pi
+                // إذا كان موبايل خارج الباي، يحوله تلقائياً
                 document.getElementById('mobile-loader').style.display = 'flex';
                 setTimeout(() => { 
                     window.location.href = "pi://bmmanagermarket0611.pinet.com"; 
                 }, 800);
             } else {
-                // إذا كان كمبيوتر، أظهر الواجهة الرمضانية الناطقة
+                // إذا كان كمبيوتر، يظهر واجهة البهجة الرمضانية
                 document.getElementById('pc-interface').style.display = 'flex';
             }
         }
